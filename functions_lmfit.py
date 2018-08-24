@@ -10,13 +10,17 @@ def linear (x, slope=1., intercept = 1.):
     "1-d linear: linear (x, slope, intercept)"
     return slope * x + intercept
 
-def powerlaw (x, prefactor=1., exponent =1., constant = 1.):
+def powerlaw (x, prefactor=1., exponent =-1., constant = 1.):
     "1-d powerlaw: powerlaw (x, prefactor, exponent, constant)"
     return prefactor * x**exponent + constant
 
-def exponential (x, prefactor=1., scal=1., constant = 1.):
+def exponential (x, prefactor=1., scal=-1., constant = 1.):
     "1-d exponential: exponential (x, prefactor, scal, constant)"
     return prefactor * exp (scal * x) + constant 
+
+def stretchedexponential (x, prefactor=1., scal=-1., beta=1., constant = 1.):
+    "1-d stretched exponential: stretchedexponential (x, prefactor, scal, beta, constant)"
+    return prefactor * exp (scal * x**beta) + constant
 
 def gaussian(x, amp = 1., cen = 1., wid = 1.):
     "1-d gaussian: gaussian(x, amp, cen, wid)"
@@ -39,8 +43,8 @@ def logpoisson(x, lambd = 1., amp = 1.):
     "continuous log Poisson: logpoisson (x, lambd, amp)"
     lnx = log (x)
     if (lambd < 0):
-#      print ("Poisson Error: lambda < 0.")
-#      sys.exit()
+       print ("Poisson Error: lambda < 0.")
+       sys.exit()
        lambd = 0.
     return  (amp * exp (-lambd) * lambd**lnx / (x * scipy.special.gamma (lnx)) )
 
